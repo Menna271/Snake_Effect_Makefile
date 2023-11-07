@@ -12,13 +12,14 @@ HEX = snake_effect.hex
 ELF = $(HEX:.hex=.elf)
 OBJ = $(HEX) $(ELF) $(TXT)
 BPATH = ./build
+SIZE = avr-size
 
 all: $(OBJ)
 	@mv $(TXT) $(HEX) $(ELF) $(BPATH)
 
 $(HEX): $(ELF)
 	$(OBJCOPY) $< $@
-	avr-size $@ > $(TXT)
+	$(SIZE) $@ > $(TXT)
 	
 
 $(LIB):
